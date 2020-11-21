@@ -17,8 +17,7 @@ public class CSVParser {
 
     public static List<Vozilo> ParseVozila(String filePath) {
         List<Vozilo> lista = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String lajna = null;
             while ((lajna = br.readLine()) != null) {
                 String[] vozilaString = lajna.split(DELIMITER);
@@ -39,8 +38,7 @@ public class CSVParser {
 
     public static List<Grad> ParseGradovi(String filePath) {
         List<Grad> lista = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath));){
             String lajna = null;
             while ((lajna = br.readLine()) != null) {
                 String[] gradoviString = lajna.split(DELIMITER);
@@ -59,8 +57,7 @@ public class CSVParser {
     }
     public static List<Vozac> ParseVozaci(String filePath) {
         List<Vozac> lista = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath));) {
             String lajna = null;
             while ((lajna = br.readLine()) != null) {
                 String[] vozaciString = lajna.split(DELIMITER);
