@@ -6,7 +6,7 @@ public class DataSourceSingleton {
     
     private static DataSource instance;
     private static final String SERVER_NAME = "localhost";
-    private static final String DATABASE_NAME = "PPPK_PROJ";
+    private static final String DATABASE_NAME = "PPPK_PROJ4";
     private static final String USER = "sas";
     private static final String PASSWORD = "SQL";
     private static final int PORT = 1433;

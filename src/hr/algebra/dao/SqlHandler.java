@@ -1,5 +1,6 @@
 package hr.algebra.dao;
 
+import hr.algebra.dao.entity.PutniNalogEnt;
 import hr.algebra.model.Grad;
 import hr.algebra.model.Vozac;
 import hr.algebra.model.Vozilo;
@@ -10,6 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.sql.DataSource;
 
 /**
@@ -217,4 +223,49 @@ public class SqlHandler {
         }
         return lista;
     }
+
+    public static List<PutniNalogEnt> DohvatiPutneNaloge(EntityManagerFactory emf) {
+        EntityManager em = null;
+        List<PutniNalogEnt> lista = new ArrayList<>();
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            Query query = em.createQuery("select pn from PutniNalogEnt as pn", PutniNalogEnt.class);
+            lista = query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return lista;
+    }
+
+    public static PutniNalogEnt GetPutniNalog(int putniNalogID, EntityManagerFactory emf) {
+        List<PutniNalogEnt> lista = new ArrayList<>();
+        EntityManager em = null;
+        PutniNalogEnt pn = new PutniNalogEnt();
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            Query query = em.createQuery("select pn from PutniNalogEnt as pn", PutniNalogEnt.class);
+            lista = query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        for (PutniNalogEnt putniNalogEnt : lista) {
+            if (putniNalogEnt.getIDNalog()==putniNalogID) {
+                pn=putniNalogEnt;
+            }
+        }
+        return pn;
+    }
+
 }
